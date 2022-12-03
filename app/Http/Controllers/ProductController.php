@@ -34,6 +34,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'desc' => 'required',
+            'email' => 'required|email',
+        ]);
         print_r($request->all());
     }
 
