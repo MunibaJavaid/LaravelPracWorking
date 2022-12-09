@@ -6,12 +6,12 @@
 
 <form action="{{route('products.store') }}" method = "post" enctype="multipart/form-data">
     @csrf
-      <pre>
-      
+      {{-- <pre>
         @php
         
             print_r($errors->all());
-        @endphp
+        @endphp  --}}
+     
       </pre>
     <div class = "row">
 

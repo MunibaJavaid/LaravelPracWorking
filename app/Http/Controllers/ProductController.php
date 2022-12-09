@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class ProductController extends Controller
 {
@@ -13,7 +14,12 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('product.show');
+        $Prod = Product::all();
+        $data = compact('Prod');
+        return view('product.show')->with($data);
+        // $productss = Product::all();
+        // echo '<pre>';
+        // print_r($productss->toArray());
     }
 
     /**
@@ -21,7 +27,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create() //get
     {
         return view('product.Prod');
     }
@@ -40,7 +46,17 @@ class ProductController extends Controller
             'desc' => 'required',
             'email' => 'required|email',
         ]);
-        print_r($request->all());
+        // echo '<pre>';
+        // print_r($request->all());
+
+        $prod = new Product();
+        $prod->Pname = $request['name'];
+        $prod->Price = $request['price'];
+        $prod->Email = $request['email'];
+        $prod->Description = $request['desc'];
+        $prod->save();
+        return redirect()->route('products.index')->with('status', 'You have successfully Created!');        // if($prod){
+        
     }
 
     /**
