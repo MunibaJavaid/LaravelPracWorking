@@ -29,6 +29,8 @@ class ProductController extends Controller
      */
     public function create() //get
     {
+        
+      
         return view('product.Prod');
     }
 
@@ -64,10 +66,20 @@ class ProductController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * 
+     * 
      */
+    // public function show(Product $product)
+    // {
+    //     return view('products.show',compact('product'));
+    // } 
     public function show($id)
     {
-        //
+        
+        $Prods = Product::find($id);
+        $data = compact('Prods');
+       
+        return view('product.DetailProd')->with($data);
     }
 
     /**
@@ -78,7 +90,10 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $Prods = Product::find($id);
+        $data = compact('Prods');
+       
+        return view('product.Edit')->with($data);
     }
 
     /**
@@ -90,7 +105,22 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'desc' => 'required',
+            'email' => 'required|email',
+        ]);
+
+        $prod = Product::find($id);
+        $prod->Pname = $request['name'];
+        $prod->Price = $request['price'];
+        $prod->Email = $request['email'];
+        $prod->Description = $request['desc'];
+        $prod->save();
+        
+    
+        return redirect()->route('products.index')->with('success','Product updated successfully');
     }
 
     /**

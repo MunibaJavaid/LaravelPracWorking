@@ -15,7 +15,14 @@
             <!-- <div class="alert alert-success">
             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{ session('status') }}
             </div> -->
-        @endif
+  
+    @elseif(session('success'))
+    <script>alert("{{ session('success') }}")</script>
+                <!-- <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{ session('status') }}
+                </div> -->
+    @endif
+       
     <a  class="btn btn-primary m-5" href="{{route('products.create')}}" role="button">Add Product</a>
 <div class="container mt-5">
       <table class="table table-bordered">
@@ -42,7 +49,8 @@
                 <td>{{$item->Description}}</td>
                 <td>{{$item->created_at}}</td>
                 <td>{{$item->updated_at}}</td>
-                <td> <a name="" id="" class="btn btn-primary" href="#" role="button">Edit</a> </td>
+                <td> <a  href = "{{route('products.show',$item->id)}}" name="" id="" class="btn btn-success" href="#" role="button">Detail</a> </td>
+                <td><a href = "{{route('products.edit',$item->id)}}" name="" id="" class="btn btn-primary" href="#" role="button">Edit</a></td>
                 <td><a name="" id="" class="btn btn-danger" href="#" role="button">Delete</a></td>
             </tr>
             @endforeach
