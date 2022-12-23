@@ -47,6 +47,7 @@ class ProductController extends Controller
             'price' => 'required',
             'desc' => 'required',
             'email' => 'required|email',
+            'img'=>'required | image |mimes:jpg,png,jpeg'
         ]);
         // echo '<pre>';
         // print_r($request->all());
@@ -56,6 +57,20 @@ class ProductController extends Controller
         $prod->Price = $request['price'];
         $prod->Email = $request['email'];
         $prod->Description = $request['desc'];
+        if($request->hasfile('img')){
+     
+            $files =  $request->file('img');
+            $FileName = $files->getClientOriginalName();
+
+            $folder = "assets/images/";
+            $dbfileloc = $folder.$FileName;
+            $files->move($folder,$dbfileloc);
+
+            $prod->ProdImage = $dbfileloc;
+
+        }
+        
+        
         $prod->save();
         return redirect()->route('products.index')->with('status', 'You have successfully Created!');        // if($prod){
         

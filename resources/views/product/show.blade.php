@@ -34,6 +34,8 @@
                 <th>Description</th>
                 <th>Created At</th>
                 <th>Updated At</th>
+                <th>Image</th>
+
                 <th></th>
                 <th></th>
             </tr>
@@ -49,6 +51,8 @@
                 <td>{{$item->Description}}</td>
                 <td>{{$item->created_at}}</td>
                 <td>{{$item->updated_at}}</td>
+                <td><img src="{{$item->ProdImage}}" alt="" width = "80" height="80"></td>
+
                 <td> <a  href = "{{route('products.show',$item->id)}}" name="" id="" class="btn btn-success" href="#" role="button">Detail</a> </td>
                 <td><a href = "{{route('products.edit',$item->id)}}" name="" id="" class="btn btn-primary" href="#" role="button">Edit</a></td>
                 <td><a name="" id="" class="btn btn-danger" href="#" role="button">Delete</a></td>

@@ -62,9 +62,16 @@
           </span>
         </div>
 
-
-        
-
+        <div class="form-group">
+          <label for=""></label>
+          <input type="file" class="form-control" name="img" id="" placeholder="Image Upload">
+          <span class = 'text-danger'>
+            @error('img')
+              {{$message}}
+              
+            @enderror
+      </span>
+        </div>
         <button type="submit" class="btn btn-primary" name = "ins">Submit</button>
 
         <a class="btn btn-secondary" href="{{route('products.index')}}"><i class="fa fa-list-alt"></i> View All</a>
